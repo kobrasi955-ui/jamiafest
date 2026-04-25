@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>الفعاليات — JamiaFest</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@500;700;900&family=Noto+Naskh+Arabic:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="icon" href="assets/img/jamiafest-logo.png" type="image/png">
+</head>
+<body>
+
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-light j-navbar">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">
+          <span class="j-brand-logo-frame" aria-hidden="true"><img class="j-brand-logo" src="assets/img/jamiafest-logo.png" alt=""></span>
+          <span>JamiaFest</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav" aria-expanded="false" aria-label="قائمة التنقل"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="nav">
+          <ul class="navbar-nav ms-auto align-items-lg-center flex-wrap">
+            <li class="nav-item"><a class="nav-link" href="index.html">الرئيسية</a></li>
+            <li class="nav-item"><a class="nav-link" href="events.html">الفعاليات</a></li>
+            <li class="nav-item"><a class="nav-link" href="about.html">عن المنصة</a></li>
+            <li class="nav-item"><a class="nav-link" href="contact.html">اتصل بنا</a></li>
+            <li class="nav-item ps-lg-2"><button type="button" id="darkToggle" class="btn-j-outline btn-sm" title="التبديل إلى الوضع الداكن">الوضع الداكن</button></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+
+    <section class="j-hero" style="padding: 2.5rem 0;">
+      <div class="container">
+        <span class="tag">دليل الفعاليات</span>
+        <h1 style="font-size: clamp(1.6rem, 4vw, 2.8rem);">استكشف <span id="resultsCount">٦</span> فعاليات قادمة</h1>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <div>
+            <button class="btn-j-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#filterOff">الفلترة</button>
+          </div>
+          <div class="d-none d-md-block" style="min-width: 260px;">
+            <input id="searchInput" class="form-control j-form-input" placeholder="ابحث باسم الفعالية..." style="border:3px solid var(--j-border); border-radius:0;">
+          </div>
+        </div>
+
+        <div id="eventsGrid" class="row g-4"></div>
+        <div id="emptyMsg" class="alert alert-warning text-center d-none mt-4" style="border:3px solid var(--j-border); border-radius:0;">
+          لا توجد فعاليات تطابق بحثك.
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- kobrasi955-ui -->
+  <div class="offcanvas offcanvas-end j-offcanvas" id="filterOff" tabindex="-1">
+    <div class="offcanvas-header border-bottom">
+      <h5 class="offcanvas-title" style="font-weight:900;">فلاتر البحث</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+    </div>
+    <div class="offcanvas-body">
+      <div class="mb-3 d-md-none">
+        <label class="form-label">بحث</label>
+        <input id="searchInputMobile" class="form-control" placeholder="اسم الفعالية..." onkeyup="document.getElementById('searchInput').value=this.value; document.getElementById('searchInput').dispatchEvent(new Event('input'));">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">التصنيف</label>
+        <select id="categoryFilter" class="form-select">
+          <option value="">كل التصنيفات</option>
+          <option value="tech">تقنية</option>
+          <option value="business">أعمال</option>
+          <option value="social">اجتماعية</option>
+          <option value="workshop">ورش</option>
+          <option value="arts">فنون</option>
+        </select>
+      </div>
+      <p class="small text-muted">يتم حفظ فلاترك محلياً ليعود استخدامها في زياراتك القادمة.</p>
+    </div>
+  </div>
+
+  <!-- kobrasi955-ui -->
+  <div class="modal fade" id="bookModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content" style="border:3px solid var(--j-border); border-radius:0;">
+        <div class="modal-header" style="border-bottom:3px solid var(--j-border); background: var(--j-cream);">
+          <h5 class="modal-title" style="font-weight:900;">حجز مقعد</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body" style="background: var(--j-cream);">
+          <form class="j-form">
+            <div class="mb-3"><label class="form-label">الاسم</label><input class="form-control" required></div>
+            <div class="mb-3"><label class="form-label">البريد</label><input type="email" class="form-control" required></div>
+          </form>
+        </div>
+        <div class="modal-footer" style="border-top:3px solid var(--j-border); background: var(--j-cream);">
+          <button class="btn-j-outline" data-bs-dismiss="modal">إلغاء</button>
+          <button class="btn-j-primary" id="bookConfirm">تأكيد</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="j-footer" role="contentinfo">
+    <div class="j-footer__strip" aria-hidden="true"></div>
+    <div class="container">
+      <div class="j-footer__layout">
+        <div class="j-footer__lead">
+          <a href="index.html" class="j-footer__logo">
+            <span class="j-brand-logo-frame j-brand-logo-frame--footer" aria-hidden="true"><img class="j-brand-logo" src="assets/img/jamiafest-logo.png" alt=""></span>
+            <span>JamiaFest</span>
+          </a>
+          <p class="j-footer__tagline">كل ما ينبض به الحرم الجامعي، في مكان واحد.</p>
+        </div>
+        <nav class="j-footer__nav" aria-label="روابط التذييل">
+          <a href="index.html">الرئيسية</a>
+          <span class="j-footer__sep" aria-hidden="true"></span>
+          <a href="events.html">الفعاليات</a>
+          <span class="j-footer__sep" aria-hidden="true"></span>
+          <a href="about.html">عن المنصة</a>
+          <span class="j-footer__sep" aria-hidden="true"></span>
+          <a href="contact.html">اتصل بنا</a>
+        </nav>
+        <div class="j-footer__reach">
+          <a class="j-footer__pill" href="mailto:hello@jamiafest.sy">hello@jamiafest.sy</a>
+          <a class="j-footer__pill j-footer__pill--phone" href="tel:+963942150780">+963 942 150 780</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <button id="scrollTopBtn" aria-label="العودة للأعلى">▲</button>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
