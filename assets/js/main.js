@@ -1,12 +1,8 @@
-/* kobrasi955-ui */
-
-/* kobrasi955-ui */
-const STORE = {
+﻿const STORE = {
   theme: "jamiafest:theme",
   lastFilter: "jamiafest:lastFilter",
 };
 
-/* kobrasi955-ui */
 const EVENT_IMAGE_SLUGS = [
   "assets/img/event-talent-night.jpg",
   "assets/img/event-book-fair.jpg",
@@ -16,7 +12,6 @@ const EVENT_IMAGE_SLUGS = [
   "assets/img/event-poetry-evening.jpg",
 ];
 
-/* kobrasi955-ui */
 const EVENTS = [
   {
     id: 1, title: "ليلة المواهب", category: "arts", date: "2026-05-05",
@@ -70,7 +65,6 @@ const CATEGORY_LABELS = {
   arts: "فنون",
 };
 
-/* kobrasi955-ui */
 const EASTERN_DIGITS = "٠١٢٣٤٥٦٧٨٩";
 function toEasternDigits(str) {
   return String(str).replace(/\d/g, (d) => EASTERN_DIGITS[d]);
@@ -111,7 +105,6 @@ function cardHTML(ev) {
   `;
 }
 
-/* kobrasi955-ui */
 function renderHomeLatest() {
   const el = document.getElementById("latestGrid");
   if (!el) return;
@@ -119,7 +112,6 @@ function renderHomeLatest() {
   el.innerHTML = latest.map(e => `<div class="col-md-6 col-lg-4">${cardHTML(e)}</div>`).join("");
 }
 
-/* kobrasi955-ui */
 function setupEventsPage() {
   const grid = document.getElementById("eventsGrid");
   if (!grid) return;
@@ -148,7 +140,6 @@ function setupEventsPage() {
   render();
 }
 
-/* kobrasi955-ui */
 function setupEventDetailsPage() {
   const host = document.getElementById("eventDetails");
   if (!host) return;
@@ -210,7 +201,6 @@ function setupEventDetailsPage() {
   }
 }
 
-/* kobrasi955-ui */
 function setupContactForm() {
   const form = document.getElementById("contactForm");
   if (!form) return;
@@ -239,7 +229,6 @@ function setupContactForm() {
   });
 }
 
-/* kobrasi955-ui */
 function setupBookModal() {
   const modal = document.getElementById("bookModal");
   if (!modal) return;
@@ -256,7 +245,6 @@ function setupBookModal() {
   });
 }
 
-/* kobrasi955-ui */
 function setupScrollTop() {
   const btn = document.getElementById("scrollTopBtn");
   if (!btn) return;
@@ -264,7 +252,6 @@ function setupScrollTop() {
   btn.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
 }
 
-/* kobrasi955-ui */
 function updateDarkToggleLabel(toggle) {
   if (!toggle) return;
   const isDark = document.body.classList.contains("dark");
@@ -284,7 +271,6 @@ function setupDarkMode() {
   });
 }
 
-/* kobrasi955-ui */
 function showToast(msg) {
   let t = document.getElementById("jToast");
   if (!t) {
@@ -298,7 +284,6 @@ function showToast(msg) {
   setTimeout(() => t.style.opacity = "0", 2200);
 }
 
-/* kobrasi955-ui */
 function highlightActiveNav() {
   const path = location.pathname.split("/").pop() || "index.html";
   document.querySelectorAll(".j-navbar .nav-link").forEach(a => {
@@ -306,7 +291,6 @@ function highlightActiveNav() {
   });
 }
 
-/* kobrasi955-ui */
 document.addEventListener("DOMContentLoaded", () => {
   highlightActiveNav();
   setupDarkMode();
